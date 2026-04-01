@@ -15,4 +15,15 @@ const listarUsuarios = async () => {
   return usuarios;
 };
 
-module.exports = { criarUsuario, listarUsuarios };
+const atualizarUsuario = async (id, nome, email, senha, tipo) => {
+  const usuario = await Usuario.findByPk(id);
+  await usuario.update({ nome, email, senha, tipo });
+  return {
+    id: usuario.id,
+    nome: usuario.nome,
+    email: usuario.email,
+    tipo: usuario.tipo
+  };
+};
+
+module.exports = { criarUsuario, listarUsuarios, atualizarUsuario };
