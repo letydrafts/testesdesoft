@@ -10,4 +10,9 @@ const criarUsuario = async (nome, email, senha, tipo) => {
   };
 };
 
-module.exports = { criarUsuario };
+const listarUsuarios = async () => {
+  const usuarios = await Usuario.findAll();
+  return usuarios;
+};
+
+module.exports = { criarUsuario, listarUsuarios };

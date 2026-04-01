@@ -5,4 +5,5 @@ const router = Router();
 
 router.post("/", criar);
 
+
 module.exports = router;

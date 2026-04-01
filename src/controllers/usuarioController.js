@@ -1,4 +1,4 @@
-const { criarUsuario } = require('../services/usuarioService');
+const { criarUsuario, listarUsuarios } = require('../services/usuarioService');
 
 const criar = async (req, res) => {
     const { nome, email, senha, tipo } = req.body;
@@ -9,4 +9,9 @@ const criar = async (req, res) => {
     res.status(201).json(usuario);
 }
 
-module.exports = { criar };
+const listar = async (res) => {
+    const usuarios = await listarUsuarios();
+    res.status(200).json(usuarios);
+}
+
+module.exports = { criar, listar };
