@@ -9,7 +9,7 @@ const criar = async (req, res) => {
     res.status(201).json(usuario);
 }
 
-const listar = async (res) => {
+const listar = async (req, res) => {
     const usuarios = await listarUsuarios();
     res.status(200).json(usuarios);
 }
