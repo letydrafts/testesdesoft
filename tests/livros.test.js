@@ -10,7 +10,7 @@ describe('Rotas de API - ATV03', ()=> {
   });
   
   test('GET /livros/:id busca um livro por id', async () => {
-    const id = 103;
+    const id = 85;
     const res = await axios.get(`${api}/livros/${id}`);
     expect(res.status).toBe(200);
   });
@@ -27,10 +27,14 @@ describe('Rotas de API - ATV03', ()=> {
   });
 
   test('PUT /livros/:id atualiza um livro', async () => {
-    const novoTitulo = 'Livro Novo'
-    const novoAutor = 'Josue'
-    const id = 1;
-    const res = await axios.put(`${api}/livros/${id}`, { 
+    const novo = await axios.post(`${api}/livros`, { 
+      titulo: 'Clean Code', 
+      autor: 'Martin Code' 
+    });
+
+    const novoTitulo = "Livro Novo"
+    const novoAutor = "Josue"
+    const res = await axios.put(`${api}/livros/${novo.data.id}`, { 
       titulo: novoTitulo, 
       autor: novoAutor
     });

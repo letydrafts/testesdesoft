@@ -6,8 +6,8 @@ const router = Router();
 router.post("/", criar);
 router.get("/", listar);
 router.get("/disponiveis", listarDisponiveis);
-router.get("/:id", buscarPorId);
 router.put("/:id", atualizar);
+router.get("/:id", buscarPorId);
 router.delete('/:id', deletar);
 
 module.exports = router;
