@@ -27,9 +27,9 @@ describe('Rotas de API - ATV03', ()=> {
   });
 
   test('PUT /livros/:id atualiza um livro', async () => {
-    const novoTitulo = 'Livo Novo'
+    const novoTitulo = 'Livro Novo'
     const novoAutor = 'Josue'
-    const id = 326;
+    const id = 1;
     const res = await axios.put(`${api}/livros/${id}`, { 
       titulo: novoTitulo, 
       autor: novoAutor

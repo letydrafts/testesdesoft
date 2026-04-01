@@ -32,6 +32,10 @@ const atualizar = async (req, res) => {
     const { titulo, autor } = req.body;
     if (!id) return res.status(400).json({ erro: 'id é obrigatório' });
     const livro = await atualizarLivro(titulo, autor, id);
+    
+    if (!livro) {
+        return res.status(404).json({ erro: 'Livro não encontrado' });
+    }
     res.status(201).json(livro);
 }
 
