@@ -1,4 +1,4 @@
-const { criarUsuario, listarUsuarios, atualizarUsuario, buscarUsuarioPorId } = require('../services/usuarioService');
+const { criarUsuario, listarUsuarios, atualizarUsuario, buscarUsuarioPorId, deletarUsuario } = require('../services/usuarioService');
 const bcrypt = require('bcrypt');
 
 const criar = async (req, res) => {
@@ -33,4 +33,11 @@ const buscarPorId = async (req, res) => {
     const usuarios = await buscarUsuarioPorId(id);
     res.status(200).json(usuarios);
 }
-module.exports = { criar, listar, atualizar, buscarPorId };
+
+const deletar = async (req, res) => {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ erro: 'id é obrigatório' });
+    await deletarUsuario(id);
+    res.status(204).send();
+}
+module.exports = { criar, listar, atualizar, buscarPorId, deletar };
