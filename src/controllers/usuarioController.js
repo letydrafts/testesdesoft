@@ -20,11 +20,10 @@ const listar = async (req, res) => {
 const atualizar = async (req, res) => {
     const { id } = req.params;
     const { nome, email, senha, tipo } = req.body;
-    if (!id) return res.status(400).json({ erro: 'id é obrigatório' });
     const usuario = await atualizarUsuario(id, nome, email, senha, tipo);
     if (!usuario) {
         return res.status(404).json({ erro: 'Usuário não encontrado' });
     }
-    res.status(201).json(usuario);
+    res.status(200).json(usuario);
 }
 module.exports = { criar, listar, atualizar };
