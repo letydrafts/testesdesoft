@@ -25,4 +25,10 @@ const atualizarUsuario = async (id, nome, email, senha, tipo) => {
   };
 };
 
-module.exports = { criarUsuario, listarUsuarios, atualizarUsuario };
+const buscarUsuarioPorId = async (id) => {
+  const usuario = await Usuario.findByPk(id);
+  return usuario;
+}
+
+
+module.exports = { criarUsuario, listarUsuarios, atualizarUsuario, buscarUsuarioPorId };
