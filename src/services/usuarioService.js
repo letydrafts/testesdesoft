@@ -30,5 +30,8 @@ const buscarUsuarioPorId = async (id) => {
   return usuario;
 }
 
+const deletarUsuario = async (id) => {
+  await Usuario.destroy({where: { id }});
+}
 
-module.exports = { criarUsuario, listarUsuarios, atualizarUsuario, buscarUsuarioPorId };
+module.exports = { criarUsuario, listarUsuarios, atualizarUsuario, buscarUsuarioPorId, deletarUsuario };
