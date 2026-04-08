@@ -16,6 +16,12 @@ describe('Emprestimos', () => {
         expect(res.data).toHaveProperty('id');
         await axios.delete(`${api}/emprestimos/${res.data.id}`);
         });
-        
-    }
-);
+    
+    test('deve retornar uma lista de emprestimos', async () => {
+        const res = await axios.get(`${api}/emprestimos`);
+        expect(res.status).toBe(200);
+        expect(Array.isArray(res.data)).toBe(true);
+    });
+
+    
+});
