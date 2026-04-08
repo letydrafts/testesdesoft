@@ -42,6 +42,15 @@ describe('Emprestimos', () => {
         }
     });
 
-    
+    test('deve retornar um emprestimo pelo id', async () => {
+        const res = await axios.get(`${api}/emprestimos/1`);
+        expect(res.status).toBe(200);
+        expect(res.data).toHaveProperty('id');
+        expect(res.data).toHaveProperty('livro_id');
+        expect(res.data).toHaveProperty('usuario_id');
+        expect(res.data).toHaveProperty('data_emprestimo');
+    });
+
+
 
     });
