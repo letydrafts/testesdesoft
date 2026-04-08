@@ -1,7 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/sequelize');
-const Livro = require('./Livro');
-const Usuario = require('./Usuario');
 
 const Emprestimo = sequelize.define('Emprestimo', {
     id: {
@@ -13,7 +11,7 @@ const Emprestimo = sequelize.define('Emprestimo', {
         type: DataTypes.INTEGER,
         allowNull: false ,
         references: {
-            model: 'livros',
+            model: 'Livros',
             key: 'id'
         }
     },
@@ -21,7 +19,7 @@ const Emprestimo = sequelize.define('Emprestimo', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'usuarios',
+            model: 'Usuarios',
             key: 'id'
         }
     },
@@ -39,7 +37,5 @@ const Emprestimo = sequelize.define('Emprestimo', {
   underscored: false,
 });
 
-Emprestimo.belongsTo(Livro, { foreignKey: 'livro_id' });
-Emprestimo.belongsTo(Usuario, { foreignKey: 'usuario_id' });
 
 module.exports = Emprestimo;
