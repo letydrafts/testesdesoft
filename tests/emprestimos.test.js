@@ -23,5 +23,16 @@ describe('Emprestimos', () => {
         expect(Array.isArray(res.data)).toBe(true);
     });
 
+    test('deve deletar um emprestimo', async () => {
+        const emprestimo = await axios.post(`${api}/emprestimos`, {
+            livro_id: livro_id,
+            usuario_id: usuario_id,
+            data_devolucao: '2024-12-31'
+        }
+        );
+        const res = await axios.delete(`${api}/emprestimos/${emprestimo.data.id}`);
+        expect(res.status).toBe(204);
+    })
+
     
 });
