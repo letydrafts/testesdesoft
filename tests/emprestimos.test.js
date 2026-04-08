@@ -10,7 +10,7 @@ describe('Emprestimos', () => {
         const res = await axios.post(`${api}/emprestimos`, {
             livro_id: livro_id,
             usuario_id: usuario_id,
-            data_devolucao: '2024-12-31'
+            data_devolucao_prevista: '2024-12-31'
         });
         expect(res.status).toBe(201);
         expect(res.data).toHaveProperty('id');
@@ -27,7 +27,7 @@ describe('Emprestimos', () => {
         const emprestimo = await axios.post(`${api}/emprestimos`, {
             livro_id: livro_id,
             usuario_id: usuario_id,
-            data_devolucao: '2024-12-31'
+            data_devolucao_prevista: '2024-12-31'
         }
         );
         const res = await axios.delete(`${api}/emprestimos/${emprestimo.data.id}`);
@@ -58,5 +58,18 @@ describe('Emprestimos', () => {
             expect(err.response.status).toBe(404);
         }
     });
+
+    test('deve retornar 400 ao registrar emprestimo sem livro_id', async () => {
+        try{
+            await axios.post(`${api}/emprestimos`, {
+                usuario_id: usuario_id,
+                data_devolucao_prevista: '2024-12-31'
+            });
+        } catch (err) {
+            expect(err.response.status).toBe(400);
+        }
+    });
+
+    
 
     });
