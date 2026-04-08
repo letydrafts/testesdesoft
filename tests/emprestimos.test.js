@@ -32,7 +32,16 @@ describe('Emprestimos', () => {
         );
         const res = await axios.delete(`${api}/emprestimos/${emprestimo.data.id}`);
         expect(res.status).toBe(204);
-    })
+    });
+
+    test('deve retornar 404 ao deletar emprestimo inexistente', async () => {
+        try{
+            await axios.delete(`${api}/emprestimos/99999`);
+        } catch (err) {
+            expect(err.response.status).toBe(404);
+        }
+    });
 
     
-});
+
+    });
