@@ -106,5 +106,15 @@ describe('Emprestimos', () => {
         expect(res.data).toHaveProperty('data_devolucao');
     });
 
+    test('deve retornar 404 ao devolver emprestimo inexistente', async () => {
+        try{
+            await axios.put(`${api}/emprestimos/99999`, {
+                data_devolucao: '2024-12-15'
+            });
+        } catch (err) {
+            expect(err.response.status).toBe(404);
+        }
+    });
+
     
 });
