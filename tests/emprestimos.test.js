@@ -121,4 +121,20 @@ describe('Emprestimos', () => {
         expect(res.status).toBe(200);
         expect(Array.isArray(res.data)).toBe(true);
     });
-});
+
+    test('deve retornar 400 ao emprestar livro ja emprestado', async () => {
+        const emprestimo = await axios.post(`${api}/emprestimos`, {
+            livro_id: livro_id,
+            usuario_id: usuario_id,
+            data_devolucao_prevista: '2024-12-31'
+        });
+       await expect(axios.post(`${api}/emprestimos`, {
+            livro_id: livro_id,
+            usuario_id: usuario_id,
+            data_devolucao_prevista: '2024-12-31'
+        })).rejects.toMatchObject({ 
+            response: { status: 400 }
+        });
+        await axios.delete(`${api}/emprestimos/${emprestimo.data.id}`);
+       });
+}); 
