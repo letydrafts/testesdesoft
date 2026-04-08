@@ -51,6 +51,12 @@ describe('Emprestimos', () => {
         expect(res.data).toHaveProperty('data_emprestimo');
     });
 
-
+    test('deve retornar 404 para emprestimo inexistente', async () => {
+        try{
+            await axios.get(`${api}/emprestimos/99999`);
+        } catch (err) {
+            expect(err.response.status).toBe(404);
+        }
+    });
 
     });
