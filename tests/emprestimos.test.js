@@ -70,6 +70,28 @@ describe('Emprestimos', () => {
         }
     });
 
+    test('deve retornar 400 ao registrar emprestimo sem usuario_id', async () => {
+        try{
+            await axios.post(`${api}/emprestimos`, {
+                livro_id: livro_id,
+                data_devolucao_prevista: '2024-12-31'
+            });
+        } catch (err) {
+            expect(err.response.status).toBe(400);
+        }
+    });
+
+    test('deve retornar 400 ao registrar emprestimo sem data de devolução prevista', async () => {
+        try{
+            await axios.post(`${api}/emprestimos`, {
+                livro_id: livro_id,
+                usuario_id: usuario_id
+            });
+        } catch (err) {
+            expect(err.response.status).toBe(400);
+            }
+    });
+
     
 
-    });
+});
