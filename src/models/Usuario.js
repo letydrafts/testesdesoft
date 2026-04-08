@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/sequelize');
+const Emprestimo = require('./Emprestimo');
 
 const Usuario = sequelize.define('Usuario', {
     id: {
@@ -30,5 +31,8 @@ const Usuario = sequelize.define('Usuario', {
   timestamps: true,
   underscored: false,
 })
+
+
+Usuario.hasMany(Emprestimo, { foreignKey: 'usuario_id' });
 
 module.exports = Usuario;
