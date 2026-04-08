@@ -29,7 +29,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      data_emprestimo_prevista: {
+      data_devolucao_prevista: {
         type: Sequelize.DATE,
         allowNull: false
       },

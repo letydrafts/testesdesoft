@@ -23,7 +23,7 @@ const Emprestimo = sequelize.define('Emprestimo', {
             key: 'id'
         }
     },
-    data_emprestimo_prevista: {  
+    data_devolucao_prevista: {  
         type: DataTypes.DATE,
         allowNull: false
     },

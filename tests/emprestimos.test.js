@@ -2,19 +2,20 @@ const axios = require('axios');
 require('dotenv').config();
 const api = `http://localhost:${process.env.PORT || 3000}`;
 
-const livro_id = 1;
-const usuario_id = 1;
+const livro_id = 85;
+const usuario_id = 2;
 
 describe('Emprestimos', () => {
+
     test('deve registrar um novo emprestimo', async () => {
         const res = await axios.post(`${api}/emprestimos`, {
             livro_id: livro_id,
             usuario_id: usuario_id,
-            data_devolucao_prevista: '2024-12-31'
+            data_devolucao_prevista: '2024-12-31',
         });
         expect(res.status).toBe(201);
         expect(res.data).toHaveProperty('id');
-        await axios.delete(`${api}/emprestimos/${res.data.id}`);
+
         });
     
     test('deve retornar uma lista de emprestimos', async () => {
