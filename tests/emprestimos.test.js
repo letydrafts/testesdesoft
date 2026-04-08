@@ -92,6 +92,19 @@ describe('Emprestimos', () => {
             }
     });
 
-    
+    test('deve registrar a devolução de um emprestimo', async () => {
+        const emprestimo = await axios.post(`${api}/emprestimos`, {
+            livro_id: livro_id,
+            usuario_id: usuario_id,
+            data_devolucao_prevista: '2024-12-31',
+        });
 
+        const res = await axios.put(`${api}/emprestimos/${emprestimo.data.id}`, {
+            data_devolucao: '2024-12-15'
+        });
+        expect(res.status).toBe(200);
+        expect(res.data).toHaveProperty('data_devolucao');
+    });
+
+    
 });
