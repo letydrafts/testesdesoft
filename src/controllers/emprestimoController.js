@@ -23,4 +23,4 @@ const listar = async (req, res) => {
 }
 
 
-module.exports = { criar };
+module.exports = { criar, listar };
