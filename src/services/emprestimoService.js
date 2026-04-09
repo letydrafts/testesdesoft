@@ -1,7 +1,6 @@
 const { Emprestimo } = require('../models');
 
 const criarEmprestimo = async (usuario_id, livro_id, data_devolucao_prevista ) => {
-  
     const livroEmprestado = await Emprestimo.findOne({ 
         where: { livro_id, data_devolucao: null } 
     });
@@ -19,4 +18,9 @@ const criarEmprestimo = async (usuario_id, livro_id, data_devolucao_prevista ) =
     };
 };
 
-module.exports = { criarEmprestimo };
+const listarEmprestimos = async () => {
+    const emprestimos = await Emprestimo.findAll();
+    return emprestimos;
+}
+
+module.exports = { criarEmprestimo, listarEmprestimos };
