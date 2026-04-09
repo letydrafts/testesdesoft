@@ -1,4 +1,4 @@
-const { criarEmprestimo } = require('../services/emprestimoService');
+const { criarEmprestimo, listarEmprestimos } = require('../services/emprestimoService');
 
 const criar = async (req, res) => {
 
@@ -16,6 +16,11 @@ const criar = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+const listar = async (req, res) => {
+    const emprestimos = await listarEmprestimos();
+    res.status(200).json(emprestimos);
+}
 
 
 module.exports = { criar };
