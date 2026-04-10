@@ -1,10 +1,11 @@
 const { criarUsuario, listarUsuarios, atualizarUsuario, buscarUsuarioPorId, deletarUsuario } = require('../services/usuarioService');
+const { buscarEmprestimoPorUsuario } = require('../services/emprestimoService');
 const bcrypt = require('bcrypt');
 
 const criar = async (req, res) => {
     const { nome, email, senha, tipo } = req.body;
     if (!nome || !email || !senha || !tipo) return res.status(400)
-        .json({ erro: 'nome, email, senha e tipo são obrigatórios'})
+        .json({ erro: 'nome, email, senha e tipo são obrigatórios' });
 
     const senhaHash = await bcrypt.hash(senha, 10);
 
@@ -22,7 +23,7 @@ const atualizar = async (req, res) => {
     const { nome, email, senha, tipo } = req.body;
     const usuario = await atualizarUsuario(id, nome, email, senha, tipo);
     if (!usuario) {
-        return res.status(404).json({ erro: 'Usuário não encontrado' });
+        return res.status(404).json({ erro: 'Usuario não encontrado' });
     }
     res.status(200).json(usuario);
 }
@@ -40,4 +41,12 @@ const deletar = async (req, res) => {
     await deletarUsuario(id);
     res.status(200).send();
 }
-module.exports = { criar, listar, atualizar, buscarPorId, deletar };
+
+const listarEmprestimos = async (req, res) => {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ erro: 'id é obrigatório' });
+    const emprestimos = await buscarEmprestimoPorUsuario(id);
+    res.status(200).json(emprestimos);
+}
+
+module.exports = { criar, listar, atualizar, buscarPorId, deletar, listarEmprestimos };

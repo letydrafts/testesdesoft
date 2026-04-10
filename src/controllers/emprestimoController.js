@@ -1,4 +1,4 @@
-const { criarEmprestimo, listarEmprestimos, atualizarEmprestimo, buscarEmprestimoPorId } = require('../services/emprestimoService');
+const { criarEmprestimo, listarEmprestimos, atualizarEmprestimo, buscarEmprestimoPorId, buscarEmprestimoPorUsuario } = require('../services/emprestimoService');
 
 const criar = async (req, res) => {
 
@@ -42,4 +42,14 @@ const buscarPorId = async (req, res) => {
     res.status(200).json(emprestimo);
 }
 
-module.exports = { criar, listar, atualizar, buscarPorId };
+const buscarPorUsuario = async (req, res) => {
+    const { usuario_id } = req.params;
+    if (!usuario_id) return res.status(400).json({ message: 'usuario_id é obrigatório' });
+    const emprestimo = await buscarEmprestimoPorUsuario(usuario_id);
+    if (!emprestimo) {
+        return res.status(404).json({ message: 'Empréstimo não encontrado' });
+    }
+    res.status(200).json(emprestimo);
+}
+
+module.exports = { criar, listar, atualizar, buscarPorId, buscarPorUsuario };

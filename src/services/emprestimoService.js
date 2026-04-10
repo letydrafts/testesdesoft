@@ -42,5 +42,10 @@ const buscarEmprestimoPorId = async (id) => {
     return emprestimo;
 }
 
+const buscarEmprestimoPorUsuario = async (usuario_id) => {
+    const emprestimos = await Emprestimo.findAll({ where: { usuario_id } });
+    return emprestimos;
+}
 
-module.exports = { criarEmprestimo, listarEmprestimos, atualizarEmprestimo, buscarEmprestimoPorId };
+
+module.exports = { criarEmprestimo, listarEmprestimos, atualizarEmprestimo, buscarEmprestimoPorId, buscarEmprestimoPorUsuario };
