@@ -25,6 +25,9 @@ const listarEmprestimos = async () => {
 
 const atualizarEmprestimo = async (id, usuario_id, livro_id, data_devolucao_prevista, data_devolucao) => {
     const emprestimo = await Emprestimo.findByPk(id);
+    if(!emprestimo) {
+        return null;
+    }
     await emprestimo.update({ usuario_id, livro_id, data_devolucao_prevista, data_devolucao });
     return {
         usuario_id: emprestimo.usuario_id,
@@ -33,4 +36,11 @@ const atualizarEmprestimo = async (id, usuario_id, livro_id, data_devolucao_prev
         data_devolucao: emprestimo.data_devolucao
     };
 }
-module.exports = { criarEmprestimo, listarEmprestimos, atualizarEmprestimo };
+
+const buscarEmprestimoPorId = async (id) => {
+    const emprestimo = await Emprestimo.findByPk(id);
+    return emprestimo;
+}
+
+
+module.exports = { criarEmprestimo, listarEmprestimos, atualizarEmprestimo, buscarEmprestimoPorId };

@@ -20,7 +20,6 @@ describe('Emprestimos', () => {
         });
         expect(res.status).toBe(201);
         expect(res.data).toHaveProperty("id");
-
     });
     
     test('deve retornar uma lista de emprestimos', async () => {
@@ -49,12 +48,19 @@ describe('Emprestimos', () => {
     });
 
     test('deve retornar um emprestimo pelo id', async () => {
-        const res = await axios.get(`${api}/emprestimos/1`);
+        const emprestimo = await axios.post(`${api}/emprestimos`, {
+            usuario_id: usuario_id,
+            livro_id: livro_id,
+            data_devolucao_prevista: '2025-05-01',
+        });
+
+        const res = await axios.get(`${api}/emprestimos/${emprestimo.data.id}`);
         expect(res.status).toBe(200);
         expect(res.data).toHaveProperty('id');
         expect(res.data).toHaveProperty('livro_id');
         expect(res.data).toHaveProperty('usuario_id');
-        expect(res.data).toHaveProperty('data_emprestimo');
+        expect(res.data).toHaveProperty('data_devolucao_prevista');
+        expect(res.data).toHaveProperty('data_devolucao');
     });
 
     test('deve retornar 404 para emprestimo inexistente', async () => {
@@ -134,13 +140,12 @@ describe('Emprestimos', () => {
             usuario_id: usuario_id,
             data_devolucao_prevista: '2024-12-31'
         });
-       await expect(axios.post(`${api}/emprestimos`, {
+    await expect(axios.post(`${api}/emprestimos`, {
             livro_id: livro_id,
             usuario_id: usuario_id,
             data_devolucao_prevista: '2024-12-31'
         })).rejects.toMatchObject({ 
             response: { status: 400 }
         });
-        await axios.delete(`${api}/emprestimos/${emprestimo.data.id}`);
-       });
+    });
 }); 
