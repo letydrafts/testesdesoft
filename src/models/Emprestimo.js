@@ -32,9 +32,9 @@ const Emprestimo = sequelize.define('Emprestimo', {
         allowNull: true
     },
 }, {
-  tableName: 'emprestimos',
-  timestamps: true,
-  underscored: false,
+tableName: 'emprestimos',
+timestamps: true,
+underscored: false,
 });
 
 

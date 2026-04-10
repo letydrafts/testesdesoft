@@ -23,4 +23,14 @@ const listarEmprestimos = async () => {
     return emprestimos;
 }
 
-module.exports = { criarEmprestimo, listarEmprestimos };
+const atualizarEmprestimo = async (id, usuario_id, livro_id, data_devolucao_prevista, data_devolucao) => {
+    const emprestimo = await Emprestimo.findByPk(id);
+    await emprestimo.update({ usuario_id, livro_id, data_devolucao_prevista, data_devolucao });
+    return {
+        usuario_id: emprestimo.usuario_id,
+        livro_id: emprestimo.livro_id,
+        data_devolucao_prevista: emprestimo.data_devolucao_prevista,
+        data_devolucao: emprestimo.data_devolucao
+    };
+}
+module.exports = { criarEmprestimo, listarEmprestimos, atualizarEmprestimo };
