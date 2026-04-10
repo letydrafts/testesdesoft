@@ -1,4 +1,4 @@
-const { criarEmprestimo, listarEmprestimos, atualizarEmprestimo, buscarEmprestimoPorId, buscarEmprestimoPorUsuario } = require('../services/emprestimoService');
+const { criarEmprestimo, listarEmprestimos, atualizarEmprestimo, buscarEmprestimoPorId, buscarEmprestimoPorUsuario, deletarEmprestimo } = require('../services/emprestimoService');
 
 const criar = async (req, res) => {
 
@@ -52,4 +52,11 @@ const buscarPorUsuario = async (req, res) => {
     res.status(200).json(emprestimo);
 }
 
-module.exports = { criar, listar, atualizar, buscarPorId, buscarPorUsuario };
+const deletar = async (req, res) => {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ erro: 'id é obrigatório' });
+    await deletarEmprestimo(id);
+    res.status(204).send();
+}
+
+module.exports = { criar, listar, atualizar, buscarPorId, buscarPorUsuario, deletar };

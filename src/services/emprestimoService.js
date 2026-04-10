@@ -47,5 +47,8 @@ const buscarEmprestimoPorUsuario = async (usuario_id) => {
     return emprestimos;
 }
 
+const deletarEmprestimo = async (id) => {
+    await Emprestimo.destroy({where: { id }});
+}
 
-module.exports = { criarEmprestimo, listarEmprestimos, atualizarEmprestimo, buscarEmprestimoPorId, buscarEmprestimoPorUsuario };
+module.exports = { criarEmprestimo, listarEmprestimos, atualizarEmprestimo, buscarEmprestimoPorId, buscarEmprestimoPorUsuario, deletarEmprestimo };
