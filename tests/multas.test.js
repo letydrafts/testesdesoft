@@ -34,4 +34,11 @@ describe('Multas', () => {
         expect(res.status).toBe(204);
     });
 
+    test('deve retornar 404 ao deletar multa inexistente', async () => {
+        try{
+            await axios.delete(`${api}/multas/99999`);
+        } catch (err) {
+            expect(err.response.status).toBe(404);
+        }
+    });
 });
