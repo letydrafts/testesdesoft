@@ -41,4 +41,22 @@ describe('Multas', () => {
             expect(err.response.status).toBe(404);
         }
     });
+
+    test('deve retornar uma multa pelo id', async () => {
+        const multa = await axios.post(`${api}/multas`, {
+            usuario_id: 1,
+            emprestimo_id: 1,
+            dias_atrasados: 5,
+            valor: 10.00,
+            quitado: false,
+        });
+        const res = await axios.get(`${api}/multas/${multa.data.id}`);
+        expect(res.status).toBe(200);
+        expect(res.data).toHaveProperty("id", multa.data.id);
+        expect(res.data).toHaveProperty("usuario_id", 1);
+        expect(res.data).toHaveProperty("emprestimo_id", 1);
+        expect(res.data).toHaveProperty("dias_atrasados", 5);
+        expect(res.data).toHaveProperty("valor", 10.00);
+        expect(res.data).toHaveProperty("quitado", false);
+    });
 });
