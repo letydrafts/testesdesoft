@@ -59,4 +59,13 @@ describe('Multas', () => {
         expect(res.data).toHaveProperty("valor", 10.00);
         expect(res.data).toHaveProperty("quitado", false);
     });
+
+    test('deve retornar 404 para multa inexistente', async () => {
+        try{
+            await axios.get(`${api}/multas/99999`);
+        } catch (err) {
+            expect(err.response.status).toBe(404);
+        }
+    });
+
 });
