@@ -16,4 +16,10 @@ describe('Multas', () => {
         expect(res.data).toHaveProperty("id");
         });
 
+    test('deve retornar uma lista de multas', async () => {
+        const res = await axios.get(`${api}/multas`);
+        expect(res.status).toBe(200);
+        expect(Array.isArray(res.data)).toBe(true);
+    });
+
 });
