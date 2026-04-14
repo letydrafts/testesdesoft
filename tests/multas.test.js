@@ -22,4 +22,16 @@ describe('Multas', () => {
         expect(Array.isArray(res.data)).toBe(true);
     });
 
+    test('deve deletar uma multa', async () => {
+        const multa = await axios.post(`${api}/multas`, {
+            usuario_id: 1,
+            emprestimo_id: 1,
+            dias_atrasados: 5,
+            valor: 10.00,
+            quitado: false,
+        });
+        const res = await axios.delete(`${api}/multas/${multa.data.id}`);
+        expect(res.status).toBe(204);
+    });
+
 });
