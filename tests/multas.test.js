@@ -93,4 +93,21 @@ describe('Multas', () => {
             expect(err.response.status).toBe(400);
         }
     });
+
+    test('deve registrar a quitação de uma multa', async () => {
+        const multa = await axios.post(`${api}/multas`, {
+            usuario_id: 1,
+            emprestimo_id: 1,
+            dias_atrasados: 5,
+            valor: 10.00,
+        });
+
+        const res = await axios.put(`${api}/multas/${multa.data.id}`, {
+            quitado: true,
+        });
+
+        expect(res.status).toBe(200);
+        expect(res.data).toHaveProperty('id', multa.data.id);
+        expect(res.data).toHaveProperty('quitado', true);
+    });
 });
