@@ -9,9 +9,16 @@ Usuario.hasMany(Emprestimo, { foreignKey: 'usuario_id' });
 Emprestimo.belongsTo(Livro, { foreignKey: 'livro_id' });
 Emprestimo.belongsTo(Usuario, { foreignKey: 'usuario_id' });
 
+Usuario.hasMany(Emprestimo, { foreignKey: 'usuario_id' });
+Emprestimo.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+
+Multa.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+Multa.belongsTo(Emprestimo, { foreignKey: 'emprestimo_id' });
+
 module.exports = {
   sequelize,
   Livro,
   Usuario,
-  Emprestimo
+  Emprestimo,
+  Multa
 };
