@@ -110,4 +110,16 @@ describe('Multas', () => {
         expect(res.data).toHaveProperty('id', multa.data.id);
         expect(res.data).toHaveProperty('quitado', true);
     });
+
+    test('deve retornar 404 ao atualizar multa inexistente', async () => {
+        try{
+            await axios.put(`${api}/multas/99999`, {
+                quitado: true,
+            });
+        } catch (err) {
+            expect(err.response.status).toBe(404);
+        }
+    });
+
+    
 });
