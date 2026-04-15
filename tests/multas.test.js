@@ -80,4 +80,17 @@ describe('Multas', () => {
             expect(err.response.status).toBe(400);
         }
     });
+
+    test('deve retornar 400 ao registrar multa sem emprestimo_id', async () => {
+        try{
+            await axios.post(`${api}/multas`, {
+                usuario_id: 1,
+                dias_atrasados: 5,
+                valor: 10.00,
+                quitado: false,
+            });
+        } catch (err) {
+            expect(err.response.status).toBe(400);
+        }
+    });
 });
