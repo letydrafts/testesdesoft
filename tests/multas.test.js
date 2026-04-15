@@ -121,5 +121,9 @@ describe('Multas', () => {
         }
     });
 
-    
+    test('deve listar multas de um usuario especifico', async () => {
+        const res = await axios.get(`${api}/usuarios/${usuario_id}/multas`);
+                expect(res.status).toBe(200);
+                expect(Array.isArray(res.data)).toBe(true);
+    });
 });
